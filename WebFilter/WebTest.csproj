@@ -1,0 +1,32 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>.\WebTest.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Core\Basic.Core.csproj" />
+    <ProjectReference Include="..\ErrorHandlingMiddleware\Basic.ErrorHandling.csproj" />
+    <ProjectReference Include="..\ErrorHandling\Basic.ErrorHandling.csproj" />
+    <ProjectReference Include="..\MvcExtension\Basic.MvcExtension.csproj" />
+    <ProjectReference Include="..\PipelineErrorHandling\Basic.GlobalErrorHandling.csproj" />
+    <ProjectReference Include="..\SugarExtension\Basic.SugarExtension.csproj" />
+    <ProjectReference Include="..\SwaggerExtension\Basic.SwaggerExtension.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="WebTest.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>
