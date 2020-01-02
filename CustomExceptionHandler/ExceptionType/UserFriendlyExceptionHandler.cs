@@ -7,7 +7,7 @@ namespace Basic.CustomExceptionHandler.ExceptionType
     {
         public static Error Get(UserFriendlyException ex)
         {
-            return new Error(ex.Code, ex.Message);
+            return new Error(ex.Code, ex.CustomMessage);
         }
     }
 }

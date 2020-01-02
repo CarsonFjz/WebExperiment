@@ -2,10 +2,9 @@
 
 namespace Basic.Core.Exceptions
 {
-    public class UserFriendlyException : Exception
+    public class UserFriendlyException : BaseCustomException
     {
-        public int Code { get; set; }
-        public UserFriendlyException(int code, string message) : base(message)
+        public UserFriendlyException(int code, string message) : base(code, message, null)
         {
             Code = code;
         }

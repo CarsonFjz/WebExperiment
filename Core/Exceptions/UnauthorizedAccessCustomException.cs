@@ -3,12 +3,11 @@ using System.Net;
 
 namespace Basic.Core.Exceptions
 {
-    public class UnauthorizedAccessCustomException : Exception
+    public class UnauthorizedAccessCustomException : BaseCustomException
     {
-        public int Code { get; set; }
-        public UnauthorizedAccessCustomException(string message) : base(message)
+        public UnauthorizedAccessCustomException(string message) : base((int)HttpStatusCode.Unauthorized, message,null)
         {
-            Code = (int)HttpStatusCode.Unauthorized;
+
         }
     }
 }
