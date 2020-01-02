@@ -7,7 +7,7 @@ namespace Basic.SugarExtension
     {
         public static IServiceCollection AddSqlSugar(this IServiceCollection services, SqlSugarClient client)
         {
-            services.AddSingleton<SqlSugarClient>(client);
+            services.AddScoped(sp => { return client; });
             return services;
         }
     }

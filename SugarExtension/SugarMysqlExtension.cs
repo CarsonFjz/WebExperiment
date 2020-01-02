@@ -15,7 +15,8 @@ namespace Basic.SugarExtension
                 InitKeyType = InitKeyType.Attribute,
                 IsShardSameThread = true
             });
-            services.AddSqlSugar(client);
+
+            services.AddScoped<SqlSugarClient>(sp => client);
         }
     }
 }

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Data;
+using System.Transactions;
 using Basic.CapWithSugarExtension.Options;
 using DotNetCore.CAP;
 using Microsoft.Extensions.DependencyInjection;
@@ -29,6 +31,19 @@ namespace Basic.CapWithSugarExtension
             });
 
             return services;
+        }
+
+
+        public static void JoinTransaction(this ICapTransaction transaction, IDbTransaction dbTransaction)
+        {
+            if (dbTransaction == null)
+            {
+                throw new ArgumentNullException("Sqlsugar Transaction Not Begin");
+            }
+
+            transaction.DbTransaction = dbTransaction;
+
+            transaction.AutoCommit = false;
         }
     }
 }
