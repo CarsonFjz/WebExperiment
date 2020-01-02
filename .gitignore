@@ -22,3 +22,6 @@
 /ErrorHandling/obj
 /CustomExceptionHandler/bin/Debug/netstandard2.0
 /CustomExceptionHandler/obj
+/CapWithSugarExtension/bin/Debug/netstandard2.0
+/CapWithSugarExtension/obj
+/WebFilter/bin/Debug/netcoreapp3.1

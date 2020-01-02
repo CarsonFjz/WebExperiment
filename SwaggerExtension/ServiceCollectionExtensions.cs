@@ -10,10 +10,7 @@ namespace Basic.SwaggerExtension
 {
     public static class ServiceCollectionExtensions
     {
-        public static IServiceCollection AddCustomSwagger(
-            this IServiceCollection services,
-            Info swaggerDoc,
-            ApiKeyScheme securityDefinition)
+        public static IServiceCollection AddCustomSwagger(this IServiceCollection services, Info swaggerDoc, ApiKeyScheme securityDefinition)
         {
             services.AddSwaggerGen((Action<SwaggerGenOptions>) (c =>
             {
@@ -41,17 +38,23 @@ namespace Basic.SwaggerExtension
             return services;
         }
 
-        private static List<string> GetAllFileByPath(
-            string path,
-            string search,
-            List<string> filePaths)
+        private static List<string> GetAllFileByPath(string path, string search, List<string> filePaths)
         {
             if (!Directory.Exists(path))
+            {
                 return filePaths;
+            }
+
             foreach (string file in Directory.GetFiles(path, search))
+            {
                 filePaths.Add(file);
+            }
+
             foreach (string directory in Directory.GetDirectories(path))
+            {
                 ServiceCollectionExtensions.GetAllFileByPath(directory, search, filePaths);
+            }
+                
             return filePaths;
         }
     }

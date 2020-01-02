@@ -21,6 +21,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "OrmExtension", "OrmExtensio
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "EventBus", "EventBus", "{6AE48D05-3D49-40F2-A8C0-CAAA6F263FFF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Basic.CapWithSugarExtension", "CapWithSugarExtension\Basic.CapWithSugarExtension.csproj", "{0A2F6227-1D5C-48C1-BC36-4CA54E264737}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{B96808D0-CF47-4F90-943A-285ED32E7F40}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B96808D0-CF47-4F90-943A-285ED32E7F40}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B96808D0-CF47-4F90-943A-285ED32E7F40}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0A2F6227-1D5C-48C1-BC36-4CA54E264737}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0A2F6227-1D5C-48C1-BC36-4CA54E264737}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0A2F6227-1D5C-48C1-BC36-4CA54E264737}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0A2F6227-1D5C-48C1-BC36-4CA54E264737}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -58,6 +64,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{EC81BD44-4612-45BE-B191-18FB3DCB9CF1} = {D250DB62-1CFB-49C1-B40E-7780CA935F01}
 		{B96808D0-CF47-4F90-943A-285ED32E7F40} = {F6F9B905-2D10-49DA-BF10-86FBFF12B554}
+		{0A2F6227-1D5C-48C1-BC36-4CA54E264737} = {6AE48D05-3D49-40F2-A8C0-CAAA6F263FFF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {51A4CBF2-9F77-45DD-9227-C38C50B468FB}

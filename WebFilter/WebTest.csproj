@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
   </PropertyGroup>
 
@@ -10,16 +10,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.App" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Core\Basic.Core.csproj" />
     <ProjectReference Include="..\CustomExceptionHandler\Basic.CustomExceptionHandler.csproj" />
-    <ProjectReference Include="..\ErrorHandlingMiddleware\Basic.ErrorHandling.csproj" />
-    <ProjectReference Include="..\ErrorHandling\Basic.ExceptionHandler.csproj" />
     <ProjectReference Include="..\MvcExtension\Basic.MvcExtension.csproj" />
-    <ProjectReference Include="..\PipelineErrorHandling\Basic.GlobalErrorHandling.csproj" />
     <ProjectReference Include="..\SugarExtension\Basic.SugarExtension.csproj" />
     <ProjectReference Include="..\SwaggerExtension\Basic.SwaggerExtension.csproj" />
   </ItemGroup>

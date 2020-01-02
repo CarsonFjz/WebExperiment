@@ -11,13 +11,17 @@ namespace Basic.SwaggerExtension
         public static void AddBasicSwagger(this IServiceCollection services, Info swaggerDoc = null, ApiKeyScheme securityDefinition = null)
         {
             Info info = swaggerDoc;
+
             if (info == null)
+            {
                 info = new Info()
                 {
                     Title = "swagger",
                     Description = "swagger",
                     Version = "default"
                 };
+            }
+
             swaggerDoc = info;
             SwaggerParam.Name = swaggerDoc.Version;
             SwaggerParam.Title = swaggerDoc.Title;
