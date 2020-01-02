@@ -15,8 +15,9 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Core\Basic.Core.csproj" />
+    <ProjectReference Include="..\CustomExceptionHandler\Basic.CustomExceptionHandler.csproj" />
     <ProjectReference Include="..\ErrorHandlingMiddleware\Basic.ErrorHandling.csproj" />
-    <ProjectReference Include="..\ErrorHandling\Basic.ErrorHandling.csproj" />
+    <ProjectReference Include="..\ErrorHandling\Basic.ExceptionHandler.csproj" />
     <ProjectReference Include="..\MvcExtension\Basic.MvcExtension.csproj" />
     <ProjectReference Include="..\PipelineErrorHandling\Basic.GlobalErrorHandling.csproj" />
     <ProjectReference Include="..\SugarExtension\Basic.SugarExtension.csproj" />

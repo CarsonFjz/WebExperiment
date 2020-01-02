@@ -1,4 +1,4 @@
-﻿using Basic.ErrorHandling;
+﻿using Basic.ExceptionHandler;
 using Basic.MvcExtension.Filters;
 using Basic.SugarExtension;
 using Basic.SwaggerExtension;
@@ -46,7 +46,7 @@ namespace WebTest
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             //处理错误要放到最前面，拦截所有的错误，mvc有自己的拦截机制，如果使用mvc拦截此中间件会无效
-            app.UsePipelineErrorHandling();
+            app.UseCustomExceptionHandler();
             app.UseMvc();
         }
     }

@@ -5,7 +5,7 @@ using System.Text.RegularExpressions;
 
 namespace Basic.Core
 {
-    public static class IsWhatExtenion
+    public static class IsWhatExtension
     {
         /// <summary>
         /// 值在的范围？

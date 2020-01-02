@@ -20,3 +20,5 @@
 /ErrorHandlingMiddleware/obj
 /ErrorHandling/bin/Debug/netstandard2.0
 /ErrorHandling/obj
+/CustomExceptionHandler/bin/Debug/netstandard2.0
+/CustomExceptionHandler/obj

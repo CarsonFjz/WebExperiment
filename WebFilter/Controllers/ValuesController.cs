@@ -1,8 +1,8 @@
-﻿using Basic.SugarExtension;
+﻿using Basic.Core.Exceptions;
+using Basic.SugarExtension;
 using Microsoft.AspNetCore.Mvc;
 using SqlSugar;
 using System.Threading.Tasks;
-using Basic.Core.ResultModel;
 using WebTest.Model;
 
 namespace WebTest.Controllers

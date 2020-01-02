@@ -15,9 +15,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Basic.Core", "Core\Basic.Co
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Middleware", "Middleware", "{F6F9B905-2D10-49DA-BF10-86FBFF12B554}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Basic.ErrorHandling", "ErrorHandling\Basic.ErrorHandling.csproj", "{B96808D0-CF47-4F90-943A-285ED32E7F40}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Basic.CustomExceptionHandler", "CustomExceptionHandler\Basic.CustomExceptionHandler.csproj", "{B96808D0-CF47-4F90-943A-285ED32E7F40}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "OrmExtension", "OrmExtension", "{D250DB62-1CFB-49C1-B40E-7780CA935F01}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "EventBus", "EventBus", "{6AE48D05-3D49-40F2-A8C0-CAAA6F263FFF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
