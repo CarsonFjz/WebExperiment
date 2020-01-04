@@ -1,4 +1,5 @@
 ﻿using Basic.CapWithSugarExtension;
+using Basic.Core.ConfigurationExtension;
 using Basic.CustomExceptionHandler;
 using Basic.MvcExtension.Filters;
 using Basic.SugarExtension;
@@ -7,6 +8,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
+using WebTest.Model;
 
 namespace WebTest
 {
@@ -35,11 +37,11 @@ namespace WebTest
         /// <param name="services"></param>
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSqlSugarUseMysql("Server=localhost;Port=3306;User ID=root;Password=942937;DataBase=my");
+            services.AddSqlSugarUseMysql();
 
             services.AddCap(x =>
             {
-                x.UseMySql("Server=localhost;Port=3306;User ID=root;Password=942937;DataBase=my");
+                x.UseSqlSugar("Server=localhost;Port=3306;User ID=root;Password=942937;DataBase=my");
                 x.UseRabbitMQ(opt =>
                 {
                     opt.HostName = "localhost";
