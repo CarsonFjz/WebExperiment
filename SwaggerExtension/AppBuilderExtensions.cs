@@ -15,11 +15,14 @@ namespace Basic.SwaggerExtension
                 throw new ArgumentNullException(nameof(app));
             }
 
-            app.UseSwagger((Action<SwaggerOptions>) (c =>
-                    c.PreSerializeFilters.Add((Action<SwaggerDocument, HttpRequest>) ((swagger, httpReq) => swagger.Host = httpReq.Host.Value))))
-                .UseSwaggerUI((Action<SwaggerUIOptions>) (c =>
-                    c.SwaggerEndpoint("/swagger/" + SwaggerParam.Name + "/swagger.json", SwaggerParam.Title + " " + SwaggerParam.Name)));
-            
+            app.UseSwagger();
+
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/"+ SwaggerParam.Name + "/swagger.json", SwaggerParam.Name);
+                c.RoutePrefix = string.Empty;
+            });
+
             return app;
         }
     }

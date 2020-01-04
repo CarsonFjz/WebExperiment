@@ -16,7 +16,7 @@ namespace Basic.SugarExtension
                 IsShardSameThread = true
             });
 
-            services.AddScoped<SqlSugarClient>(sp => client);
+            services.AddSqlSugar(client);
         }
     }
 }

@@ -33,24 +33,6 @@ namespace Basic.MvcExtension.Filters
                     context.Result = new JsonResult(result);
                 }
             }
-            else if (context.Result is EmptyResult)
-            {
-                var result = new Result<object>(true);
-
-                context.Result = new JsonResult(result);
-            }
-            else if (context.Result is ContentResult)
-            {
-                var result = new Result<object>((context.Result as ContentResult).Content);
-
-                context.Result = new JsonResult(result);
-            }
-            else if (context.Result is StatusCodeResult)
-            {
-                var result = new Result<object>((context.Result as StatusCodeResult).StatusCode);
-
-                context.Result = new JsonResult(result);
-            }
         }
     }
 }

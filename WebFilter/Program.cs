@@ -20,7 +20,7 @@ namespace WebTest
 
         /// <summary>
         /// 
-        /// </summary>
+        /// </summary>'Microsoft.AspNetCore.Mvc.MvcJsonOptions' from assembly 'Microsoft.AspNetCore.Mvc.Formatters.Json, Version=3.1.0.0, 
         /// <param name="args"></param>
         /// <returns></returns>
         public static IHostBuilder CreateHostBuilder(string[] args) =>

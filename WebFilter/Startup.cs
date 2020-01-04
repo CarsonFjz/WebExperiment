@@ -1,11 +1,12 @@
-﻿using Basic.CustomExceptionHandler;
+﻿using Basic.CapWithSugarExtension;
+using Basic.CustomExceptionHandler;
 using Basic.MvcExtension.Filters;
 using Basic.SugarExtension;
 using Basic.SwaggerExtension;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Swashbuckle.AspNetCore.Swagger;
+using Microsoft.OpenApi.Models;
 
 namespace WebTest
 {
@@ -34,7 +35,22 @@ namespace WebTest
         /// <param name="services"></param>
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSqlSugarUseMysql("Server=rm-wz9a059sw5s0au6e29o.mysql.rds.aliyuncs.com;Port=3306;User ID=root;Password=RootXdf@124;DataBase=test1");
+            services.AddSqlSugarUseMysql("Server=localhost;Port=3306;User ID=root;Password=942937;DataBase=my");
+
+            services.AddCap(x =>
+            {
+                x.UseMySql("Server=localhost;Port=3306;User ID=root;Password=942937;DataBase=my");
+                x.UseRabbitMQ(opt =>
+                {
+                    opt.HostName = "localhost";
+                    opt.UserName = "guest";
+                    opt.Password = "guest";
+                    opt.Port = 5672;
+                });
+                x.UseDashboard();
+                x.FailedRetryCount = 1;
+                x.ConsumerThreadCount = 1;
+            });
 
             services.AddControllers(opt =>
             {
@@ -43,9 +59,9 @@ namespace WebTest
                 //返回统一格式参数
                 opt.Filters.Add(typeof(MvcApiResultFilter), 2);
 
-            });
+            }).AddNewtonsoftJson();
 
-            services.AddBasicSwagger(new Info()
+            services.AddBasicSwagger(new OpenApiInfo()
             {
                 Title = "WebFilter",
                 Description = "WebFilter",

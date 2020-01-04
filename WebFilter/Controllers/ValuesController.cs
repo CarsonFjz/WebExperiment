@@ -1,8 +1,9 @@
-﻿using Basic.Core.Exceptions;
+﻿using Basic.CapWithSugarExtension;
 using Basic.SugarExtension;
 using Microsoft.AspNetCore.Mvc;
 using SqlSugar;
 using System.Threading.Tasks;
+using DotNetCore.CAP;
 using WebTest.Model;
 
 namespace WebTest.Controllers
@@ -17,14 +18,19 @@ namespace WebTest.Controllers
         /// <summary>
         /// sqlClient
         /// </summary>
-        public readonly SqlSugarClient _sugarClient;
+        private readonly SqlSugarClient _sugarClient;
+
+        private readonly ICapPublisher _tranPublisher;
+
         /// <summary>
         /// ctor
         /// </summary>
         /// <param name="sugarClient"></param>
-        public ValuesController(SqlSugarClient sugarClient)
+        /// <param name="tranPublisher"></param>
+        public ValuesController(SqlSugarClient sugarClient, ICapPublisher tranPublisher)
         {
             _sugarClient = sugarClient;
+            _tranPublisher = tranPublisher;
         }
         /// <summary>
         /// GET
@@ -32,18 +38,19 @@ namespace WebTest.Controllers
         /// <returns></returns>
         [HttpGet]
         //[MvcAuthorize]
-        [UnitOfWork]
-        public async Task<Test> Get()
+        //[UnitOfWork] //普通事务
+        [CapUnitOfWork] //cap的事务
+        public async Task<test> Get()
         {
-            var entity = new Test() {Name = "cccc"};
+            var entity = new test() {Name = "cccc"};
 
-            entity.Id = await _sugarClient.Insertable<Test>(entity).ExecuteReturnIdentityAsync();
+            entity.Id = await _sugarClient.Insertable<test>(entity).ExecuteReturnIdentityAsync();
 
             entity.Name = "asda";
 
-            throw new UserFriendlyException(300,"m");
+            await _sugarClient.Updateable<test>(entity).ExecuteCommandAsync();
 
-            await _sugarClient.Updateable<Test>(entity).ExecuteCommandAsync();
+            await _tranPublisher.PublishAsync("test", entity);
 
             return entity;
         }
@@ -56,6 +63,15 @@ namespace WebTest.Controllers
         public Task<int> ModelBinding([FromBody]TestRequest request)
         {
             return Task.FromResult(1);
+        }
+
+        /// <summary>
+        /// Content
+        /// </summary>
+        [HttpPost("Content")]
+        public ContentResult Content()
+        {
+            return Content("111");
         }
     }
 }

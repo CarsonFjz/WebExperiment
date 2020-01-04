@@ -3,18 +3,19 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Swashbuckle.AspNetCore.Swagger;
 using System;
+using Microsoft.OpenApi.Models;
 
 namespace Basic.SwaggerExtension
 {
     public static class SwaggerExtension
     {
-        public static void AddBasicSwagger(this IServiceCollection services, Info swaggerDoc = null, ApiKeyScheme securityDefinition = null)
+        public static void AddBasicSwagger(this IServiceCollection services, OpenApiInfo swaggerDoc = null)
         {
-            Info info = swaggerDoc;
+            OpenApiInfo info = swaggerDoc;
 
             if (info == null)
             {
-                info = new Info()
+                info = new OpenApiInfo()
                 {
                     Title = "swagger",
                     Description = "swagger",
@@ -25,7 +26,7 @@ namespace Basic.SwaggerExtension
             swaggerDoc = info;
             SwaggerParam.Name = swaggerDoc.Version;
             SwaggerParam.Title = swaggerDoc.Title;
-            services.AddCustomSwagger(swaggerDoc, securityDefinition);
+            services.AddCustomSwagger(swaggerDoc);
             services.AddTransient<IStartupFilter, SwaggerStartupFilter>();
         }
 

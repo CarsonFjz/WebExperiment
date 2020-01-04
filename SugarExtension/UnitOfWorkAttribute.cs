@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc.Filters;
+using Microsoft.Extensions.DependencyInjection;
 using SqlSugar;
 
 namespace Basic.SugarExtension
@@ -7,12 +8,14 @@ namespace Basic.SugarExtension
     {
         public override void OnActionExecuting(ActionExecutingContext context)
         {
-            ((SqlSugarClient)context.HttpContext.RequestServices.GetService(typeof(SqlSugarClient))).BeginTran();
+            var service = context.HttpContext.RequestServices.GetRequiredService<SqlSugarClient>();
+
+            service.BeginTran();
         }
 
         public override void OnActionExecuted(ActionExecutedContext context)
         {
-            SqlSugarClient service = (SqlSugarClient)context.HttpContext.RequestServices.GetService(typeof(SqlSugarClient));
+            SqlSugarClient service = context.HttpContext.RequestServices.GetRequiredService<SqlSugarClient>();
 
             if (context.Exception == null)
             {
