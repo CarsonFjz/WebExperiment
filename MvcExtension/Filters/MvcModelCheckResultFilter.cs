@@ -1,8 +1,6 @@
-﻿using Basic.MvcExtension.Tips;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
-using System.Text;
-using Basic.Core.ResultModel;
+using System.Net;
 
 namespace Basic.MvcExtension.Filters
 {
@@ -17,21 +15,27 @@ namespace Basic.MvcExtension.Filters
         {
             if (!context.ModelState.IsValid)
             {
-                var sb = new StringBuilder();
+                var errorArr = new ModelBindingErrorModel();
 
                 foreach (var item in context.ModelState.Values)
                 {
-                    foreach (var error in item.Errors)
+                    errorArr.Errors = new string[item.Errors.Count];
+
+                    for (int i = 0; i < item.Errors.Count; i++)
                     {
-                        sb.AppendFormat("{0}", error.ErrorMessage, "|");
+                        errorArr.Errors[i] = item.Errors[i].ErrorMessage;
                     }
                 }
 
-                var errorModel = new Error(ModelBindingErrorTip.Code, sb.ToString());
+                if (errorArr.Errors != null)
+                {
+                    var result = new JsonResult(errorArr)
+                    {
+                        StatusCode = (int)HttpStatusCode.BadRequest
+                    };
 
-                var result = new Result<Error>(errorModel);
-
-                context.Result = new JsonResult(result);
+                    context.Result = result;
+                }
             }
         }
     }

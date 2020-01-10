@@ -1,10 +1,15 @@
 ﻿using Basic.CapWithSugarExtension;
 using Basic.SugarExtension;
+using DotNetCore.CAP;
 using Microsoft.AspNetCore.Mvc;
 using SqlSugar;
 using System.Threading.Tasks;
-using DotNetCore.CAP;
+using Basic.Core.ResultModel;
+using JwtSecurityTokenExtension.Infrastructure;
 using WebTest.Model;
+using Microsoft.AspNetCore.Authorization;
+using System.Collections.Generic;
+using JwtSecurityTokenExtension;
 
 namespace WebTest.Controllers
 {
@@ -22,16 +27,48 @@ namespace WebTest.Controllers
 
         private readonly ICapPublisher _tranPublisher;
 
+        private readonly IJwtSecurityTokenExtension _tokenHelper;
+
         /// <summary>
         /// ctor
         /// </summary>
         /// <param name="sugarClient"></param>
+        /// <param name="tokenHelper"></param>
         /// <param name="tranPublisher"></param>
-        public ValuesController(SqlSugarClient sugarClient, ICapPublisher tranPublisher)
+        public ValuesController(SqlSugarClient sugarClient, IJwtSecurityTokenExtension tokenHelper, ICapPublisher tranPublisher)
         {
             _sugarClient = sugarClient;
             _tranPublisher = tranPublisher;
+            _tokenHelper = tokenHelper;
         }
+
+        /// <summary>
+        /// 获取token
+        /// </summary>
+        /// <param name="role"></param>
+        /// <param name="permission"></param>
+        /// <returns></returns>
+        [HttpGet(nameof(Token))]
+        [AllowAnonymous]
+        public async Task<TokenOut> Token(string role, string permission)
+        {
+            var dic = new Dictionary<string, string>
+            {
+                {"rol", role},//角色
+                {"per", permission}//权限
+            };
+
+            return await _tokenHelper.CreateToken(dic);
+        }
+
+        //[HttpGet(nameof(RefreshToken))]
+        //[AllowAnonymous]
+        //public ActionResult<TokenOut> RefreshToken(string refreshToken)
+        //{
+        //    return _tokenHelper.RefreshToken(refreshToken);
+        //}
+
+
         /// <summary>
         /// GET
         /// </summary>
@@ -53,6 +90,32 @@ namespace WebTest.Controllers
             await _tranPublisher.PublishAsync("test", entity);
 
             return entity;
+        }
+
+
+        /// <summary>
+        /// 错误
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("Error")]
+        [UnitOfWork]
+        public async Task<string> Error()
+        {
+            throw new UserFriendlyException("err");
+            //CustomExceptionContext.Throw(new UserFriendlyException(999,"err"));
+            return await Task.FromResult("");
+        }
+
+        /// <summary>
+        /// 错误2
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("Error2")]
+        public async Task<string> Error2()
+        {
+            throw new UserFriendlyException("err");
+            //CustomExceptionContext.Throw(new UserFriendlyException(999,"err"));
+            return await Task.FromResult("");
         }
 
         /// <summary>

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Basic.Core
+﻿namespace Basic.Core
 {
     public class ApplicationBaseInfo
     {
@@ -12,9 +8,9 @@ namespace Basic.Core
         }
         public static string Name = "";
 
-        public static void SetAppSettingPath(string path)
+        public static void SetAppSettingPath(string appSettingPath)
         {
-            AppSettingPath = path;
+            AppSettingPath = appSettingPath;
         }
         public static string AppSettingPath = "appsettings.json";
     }

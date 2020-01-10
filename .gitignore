@@ -25,3 +25,5 @@
 /CapWithSugarExtension/bin/Debug/netstandard2.0
 /CapWithSugarExtension/obj
 /WebFilter/bin/Debug/netcoreapp3.1
+/JwtSecurityTokenExtension/bin/Debug/netstandard2.0
+/JwtSecurityTokenExtension/obj

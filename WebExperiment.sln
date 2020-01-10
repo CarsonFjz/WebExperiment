@@ -17,11 +17,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Middleware", "Middleware", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Basic.CustomExceptionHandler", "CustomExceptionHandler\Basic.CustomExceptionHandler.csproj", "{B96808D0-CF47-4F90-943A-285ED32E7F40}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "OrmExtension", "OrmExtension", "{D250DB62-1CFB-49C1-B40E-7780CA935F01}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Database", "Database", "{D250DB62-1CFB-49C1-B40E-7780CA935F01}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "EventBus", "EventBus", "{6AE48D05-3D49-40F2-A8C0-CAAA6F263FFF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Basic.CapWithSugarExtension", "CapWithSugarExtension\Basic.CapWithSugarExtension.csproj", "{0A2F6227-1D5C-48C1-BC36-4CA54E264737}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Basic.CapWithSugarExtension", "CapWithSugarExtension\Basic.CapWithSugarExtension.csproj", "{0A2F6227-1D5C-48C1-BC36-4CA54E264737}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Communication", "Communication", "{97C30C11-D6A1-497D-9A11-65E095DEBFB0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Authorized", "Authorized", "{15B6F1CD-0B21-4FCB-92F1-0DC7CFD00F96}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JwtSecurityTokenExtension", "JwtSecurityTokenExtension\JwtSecurityTokenExtension.csproj", "{F847827D-4BC7-4C1B-82E6-146DBD0C87E8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -57,6 +63,10 @@ Global
 		{0A2F6227-1D5C-48C1-BC36-4CA54E264737}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0A2F6227-1D5C-48C1-BC36-4CA54E264737}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0A2F6227-1D5C-48C1-BC36-4CA54E264737}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F847827D-4BC7-4C1B-82E6-146DBD0C87E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F847827D-4BC7-4C1B-82E6-146DBD0C87E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F847827D-4BC7-4C1B-82E6-146DBD0C87E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F847827D-4BC7-4C1B-82E6-146DBD0C87E8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -65,6 +75,7 @@ Global
 		{EC81BD44-4612-45BE-B191-18FB3DCB9CF1} = {D250DB62-1CFB-49C1-B40E-7780CA935F01}
 		{B96808D0-CF47-4F90-943A-285ED32E7F40} = {F6F9B905-2D10-49DA-BF10-86FBFF12B554}
 		{0A2F6227-1D5C-48C1-BC36-4CA54E264737} = {6AE48D05-3D49-40F2-A8C0-CAAA6F263FFF}
+		{F847827D-4BC7-4C1B-82E6-146DBD0C87E8} = {15B6F1CD-0B21-4FCB-92F1-0DC7CFD00F96}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {51A4CBF2-9F77-45DD-9227-C38C50B468FB}

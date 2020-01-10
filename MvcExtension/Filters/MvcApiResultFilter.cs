@@ -1,7 +1,7 @@
 ﻿using Basic.Core.ResultModel;
-using Basic.MvcExtension.Tips;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using System;
 
 namespace Basic.MvcExtension.Filters
 {
@@ -20,15 +20,11 @@ namespace Basic.MvcExtension.Filters
 
                 if (objectResult.Value == null)
                 {
-                    var error = new Error(NotFoundResultTip.Code, NotFoundResultTip.Value);
-
-                    var result = new Result<object>(error);
-
-                    context.Result = new JsonResult(result);
+                    throw new Exception("no ObjectResult");
                 }
                 else
                 {
-                    var result = new Result<object>(((ObjectResult)context.Result).Value);
+                    var result = new PublicResult<object>(((ObjectResult)context.Result).Value);
 
                     context.Result = new JsonResult(result);
                 }

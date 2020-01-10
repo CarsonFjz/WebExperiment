@@ -1,11 +1,11 @@
-﻿using Basic.Core.ResultModel;
-using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Options;
-using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
+using Basic.CustomExceptionHandler.Infrastructure;
 
 namespace Basic.CustomExceptionHandler
 {
@@ -32,8 +32,9 @@ namespace Basic.CustomExceptionHandler
         /// 拦截中间件错误
         /// </summary>
         /// <param name="context"></param>
+        /// <param name="customExceptionHandlers"></param>
         /// <returns></returns>
-        public async Task Invoke(HttpContext context)
+        public async Task Invoke(HttpContext context, IEnumerable<ICustomExceptionHandler> customExceptionHandlers)
         {
             try
             {
@@ -41,20 +42,29 @@ namespace Basic.CustomExceptionHandler
             }
             catch (Exception ex)
             {
+                var exceptionName = ex.GetType().Name;
+
+                //在抛出错误前执行逻辑
+                await _exceptionOptions.OnException.Invoke(context, exceptionName, ex);
+
                 //追踪底层错误
                 while (ex.InnerException != null) ex = ex.InnerException;
 
-                var logger = context.RequestServices.GetRequiredService<ILoggerFactory>()
-                    .CreateLogger<CustomExceptionHandlerOptions>();
+                if (exceptionName == nameof(Exception))
+                {
+                    await context.HttpWriteAsync((int)HttpStatusCode.InternalServerError, ex.Message);
+                }
 
-                var error = _exceptionOptions.OnException.Invoke(context, logger, ex);
+                var handler = customExceptionHandlers.FirstOrDefault(x => x.Realize == exceptionName);
 
-                //返回错误
-                var resultDto = new Result<Error>(error);
-
-                context.Response.StatusCode = 200;
-                context.Response.ContentType = "application/json; charset=utf-8";
-                await context.Response.WriteAsync(JsonConvert.SerializeObject(resultDto));
+                if (handler != null)
+                {
+                    await handler.Excute(context, ex);
+                }
+                else
+                {
+                    await context.HttpWriteAsync((int)HttpStatusCode.InternalServerError, "exception handler not implementation");
+                }
             }
         }
     }

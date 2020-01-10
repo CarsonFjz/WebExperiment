@@ -6,6 +6,6 @@ namespace Basic.SugarExtension
 {
     public class SqlSugarConfig
     {
-        public static string Key = "SqlConnection";
+        public const string Key = "SqlConnection";
     }
 }

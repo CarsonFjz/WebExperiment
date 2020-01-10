@@ -1,14 +1,15 @@
 ﻿using Basic.CapWithSugarExtension;
-using Basic.Core.ConfigurationExtension;
 using Basic.CustomExceptionHandler;
 using Basic.MvcExtension.Filters;
 using Basic.SugarExtension;
 using Basic.SwaggerExtension;
+using JwtSecurityTokenExtension;
+using JwtSecurityTokenExtension.Infrastructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
-using WebTest.Model;
+using WebTest.Exceptions.ExceptionHandler;
 
 namespace WebTest
 {
@@ -37,11 +38,19 @@ namespace WebTest
         /// <param name="services"></param>
         public void ConfigureServices(IServiceCollection services)
         {
+            //处理错误要放到最前面，拦截所有的错误，mvc有自己的拦截机制，如果使用mvc拦截此中间件会无效
+            //这里一般会用来拦截非MVC的其他中间件的错误，把控到返回前端的数据
+            //可以传递多个参数，以指定拦截不同的异常类型
+            services.AddCustomExceptionHandler(typeof(UserFriendlyExceptionHandler));
+
+            services.AddJwtTokenExtension(x=>x.IssuerSigningKey = "asahsjajsjakskakskaskasdjsakdhdjkashdjkahsjdhasjkldhakslhdsajhdklsajdhksaljdhsahdkslajdklsadakdasda");
+            //services.AddSingleton<IUserPermissionStore, UserPermissionStore>();
+
             services.AddSqlSugarUseMysql();
 
             services.AddCap(x =>
             {
-                x.UseSqlSugar("Server=localhost;Port=3306;User ID=root;Password=942937;DataBase=my");
+                x.UseSqlSugar();
                 x.UseRabbitMQ(opt =>
                 {
                     opt.HostName = "localhost";
@@ -56,10 +65,14 @@ namespace WebTest
 
             services.AddControllers(opt =>
             {
+                //模型绑定允许空
+                opt.AllowEmptyInputInBodyModelBinding = true;
                 //ModelBinding统一处理
                 opt.Filters.Add(typeof(MvcModelCheckResultFilter), 1);
                 //返回统一格式参数
                 opt.Filters.Add(typeof(MvcApiResultFilter), 2);
+                //异常处理
+                opt.Filters.Add(typeof(UserFriendlyExceptionFilterAttribute));
 
             }).AddNewtonsoftJson();
 
@@ -78,8 +91,7 @@ namespace WebTest
         /// <param name="env"></param>
         public void Configure(IApplicationBuilder app)
         {
-            //处理错误要放到最前面，拦截所有的错误，mvc有自己的拦截机制，如果使用mvc拦截此中间件会无效
-            app.UseCustomExceptionHandler();
+            //app.UseMiddleware<ExceptionHandlerMiddleware>();
 
             app.UseRouting();
             app.UseEndpoints(endpoints =>

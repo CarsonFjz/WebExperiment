@@ -17,6 +17,7 @@
     <ProjectReference Include="..\CapWithSugarExtension\Basic.CapWithSugarExtension.csproj" />
     <ProjectReference Include="..\Core\Basic.Core.csproj" />
     <ProjectReference Include="..\CustomExceptionHandler\Basic.CustomExceptionHandler.csproj" />
+    <ProjectReference Include="..\JwtSecurityTokenExtension\JwtSecurityTokenExtension.csproj" />
     <ProjectReference Include="..\MvcExtension\Basic.MvcExtension.csproj" />
     <ProjectReference Include="..\SugarExtension\Basic.SugarExtension.csproj" />
     <ProjectReference Include="..\SwaggerExtension\Basic.SwaggerExtension.csproj" />
