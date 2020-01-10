@@ -27,3 +27,6 @@
 /WebFilter/bin/Debug/netcoreapp3.1
 /JwtSecurityTokenExtension/bin/Debug/netstandard2.0
 /JwtSecurityTokenExtension/obj
+/AuthorizationExtension/bin/Debug/netcoreapp3.1
+/AuthorizationExtension/obj
+/JwtSecurityTokenExtension/bin/Debug

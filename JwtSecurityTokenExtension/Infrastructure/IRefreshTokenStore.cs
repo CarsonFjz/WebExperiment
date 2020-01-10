@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 
-namespace JwtSecurityTokenExtension.Infrastructure
+namespace Basic.JwtSecurityTokenExtension.Infrastructure
 {
     public interface IRefreshTokenStore
     {

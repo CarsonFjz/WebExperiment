@@ -1,21 +1,21 @@
-﻿using JwtSecurityTokenExtension.Infrastructure;
-using Microsoft.IdentityModel.Tokens;
+﻿using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using Basic.JwtSecurityTokenExtension.Infrastructure;
 
-namespace JwtSecurityTokenExtension.Implementation
+namespace Basic.JwtSecurityTokenExtension.Implementation
 {
-    public class JwtSecurityTokenExtension : JwtSecurityTokenHandler, IJwtSecurityTokenExtension
+    public class JwtSecurityToken : JwtSecurityTokenHandler, IJwtSecurityToken
     {
         protected readonly JwtOption _jwtOption;
         private readonly IRefreshTokenStore _refreshTokenStore;
         private readonly DateTime _currentTime = DateTime.Now;
         
-        public JwtSecurityTokenExtension(JwtOption jwtOption, IRefreshTokenStore refreshTokenStore)
+        public JwtSecurityToken(JwtOption jwtOption, IRefreshTokenStore refreshTokenStore)
         {
             _jwtOption = jwtOption;
             _refreshTokenStore = refreshTokenStore;

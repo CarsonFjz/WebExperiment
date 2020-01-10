@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace JwtSecurityTokenExtension
+namespace Basic.JwtSecurityTokenExtension
 {
     public class RefreshTokenModel
     {

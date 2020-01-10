@@ -1,8 +1,8 @@
-﻿using JwtSecurityTokenExtension.Infrastructure;
+﻿using Basic.JwtSecurityTokenExtension.Infrastructure;
 using Microsoft.Extensions.Caching.Memory;
 using System;
 
-namespace JwtSecurityTokenExtension.Implementation
+namespace Basic.JwtSecurityTokenExtension.Implementation
 {
     public class RefreshTokenStore : IRefreshTokenStore
     {

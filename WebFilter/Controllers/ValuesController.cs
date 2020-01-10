@@ -1,15 +1,16 @@
 ﻿using Basic.CapWithSugarExtension;
+using Basic.Core.ResultModel;
 using Basic.SugarExtension;
 using DotNetCore.CAP;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SqlSugar;
-using System.Threading.Tasks;
-using Basic.Core.ResultModel;
-using JwtSecurityTokenExtension.Infrastructure;
-using WebTest.Model;
-using Microsoft.AspNetCore.Authorization;
 using System.Collections.Generic;
-using JwtSecurityTokenExtension;
+using System.Threading.Tasks;
+using Basic.JwtSecurityTokenExtension;
+using Basic.JwtSecurityTokenExtension.Infrastructure;
+using WebTest.Model;
+using Basic.AuthorizationExtension.RoleAuthorization;
 
 namespace WebTest.Controllers
 {
@@ -27,7 +28,7 @@ namespace WebTest.Controllers
 
         private readonly ICapPublisher _tranPublisher;
 
-        private readonly IJwtSecurityTokenExtension _tokenHelper;
+        private readonly IJwtSecurityToken _tokenHelper;
 
         /// <summary>
         /// ctor
@@ -35,7 +36,7 @@ namespace WebTest.Controllers
         /// <param name="sugarClient"></param>
         /// <param name="tokenHelper"></param>
         /// <param name="tranPublisher"></param>
-        public ValuesController(SqlSugarClient sugarClient, IJwtSecurityTokenExtension tokenHelper, ICapPublisher tranPublisher)
+        public ValuesController(SqlSugarClient sugarClient, IJwtSecurityToken tokenHelper, ICapPublisher tranPublisher)
         {
             _sugarClient = sugarClient;
             _tranPublisher = tranPublisher;
@@ -111,6 +112,7 @@ namespace WebTest.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet("Error2")]
+        [RoleCheck("admin")]
         public async Task<string> Error2()
         {
             throw new UserFriendlyException("err");
@@ -123,6 +125,7 @@ namespace WebTest.Controllers
         /// </summary>
         /// <param name="request"></param>
         [HttpPost("ModelBinding")]
+        [RoleCheck("admin2")]
         public Task<int> ModelBinding([FromBody]TestRequest request)
         {
             return Task.FromResult(1);

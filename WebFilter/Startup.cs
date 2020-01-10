@@ -1,10 +1,10 @@
-﻿using Basic.CapWithSugarExtension;
+﻿using Basic.AuthorizationExtension;
+using Basic.CapWithSugarExtension;
 using Basic.CustomExceptionHandler;
+using Basic.JwtSecurityTokenExtension;
 using Basic.MvcExtension.Filters;
 using Basic.SugarExtension;
 using Basic.SwaggerExtension;
-using JwtSecurityTokenExtension;
-using JwtSecurityTokenExtension.Infrastructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -43,7 +43,9 @@ namespace WebTest
             //可以传递多个参数，以指定拦截不同的异常类型
             services.AddCustomExceptionHandler(typeof(UserFriendlyExceptionHandler));
 
-            services.AddJwtTokenExtension(x=>x.IssuerSigningKey = "asahsjajsjakskakskaskasdjsakdhdjkashdjkahsjdhasjkldhakslhdsajhdklsajdhksaljdhsahdkslajdklsadakdasda");
+            services.AddExtensionAuthorization(Configuration);
+
+            services.AddJwtTokenExtension(x=>x.IssuerSigningKey = "Carson1234567890123123");
             //services.AddSingleton<IUserPermissionStore, UserPermissionStore>();
 
             services.AddSqlSugarUseMysql();
@@ -91,13 +93,15 @@ namespace WebTest
         /// <param name="env"></param>
         public void Configure(IApplicationBuilder app)
         {
-            //app.UseMiddleware<ExceptionHandlerMiddleware>();
+            
 
             app.UseRouting();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
             });
+
+            app.UseAuthentication();
         }
     }
 }

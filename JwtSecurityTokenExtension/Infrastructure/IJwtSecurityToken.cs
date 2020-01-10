@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace JwtSecurityTokenExtension.Infrastructure
+namespace Basic.JwtSecurityTokenExtension.Infrastructure
 {
-    public interface IJwtSecurityTokenExtension
+    public interface IJwtSecurityToken
     {
         /// <summary>
         /// 创建token

@@ -1,11 +1,11 @@
 ﻿using Basic.Core;
-using JwtSecurityTokenExtension.Implementation;
+using Basic.JwtSecurityTokenExtension.Implementation;
+using Basic.JwtSecurityTokenExtension.Infrastructure;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using System;
-using JwtSecurityTokenExtension.Infrastructure;
 
-namespace JwtSecurityTokenExtension
+namespace Basic.JwtSecurityTokenExtension
 {
     public static class ServiceCollectionExtensions
     {
@@ -20,14 +20,16 @@ namespace JwtSecurityTokenExtension
                 throw new ArgumentNullException("密钥不能为空");
             }
 
-            if (config.IssuerSigningKey.Length <= 36)
+            if (config.IssuerSigningKey.Length <= 18)
             {
-                throw new ArgumentException("密钥需要大于36位");
+                throw new ArgumentException("密钥需要大于18位");
             }
 
-            services.AddScoped<IJwtSecurityTokenExtension, Implementation.JwtSecurityTokenExtension>();
+            services.AddMemoryCache();
 
-            services.TryAddSingleton<IRefreshTokenStore, RefreshTokenStore>();
+            services.TryAddScoped<IJwtSecurityToken, JwtSecurityToken>();
+
+            services.TryAddScoped<IRefreshTokenStore, RefreshTokenStore>();
 
             services.AddSingleton(config);
 

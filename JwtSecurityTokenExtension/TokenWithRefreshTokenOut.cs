@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace JwtSecurityTokenExtension
+namespace Basic.JwtSecurityTokenExtension
 {
     public class TokenWithRefreshTokenOut : TokenOut
     {

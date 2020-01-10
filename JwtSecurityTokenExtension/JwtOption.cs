@@ -1,4 +1,4 @@
-﻿namespace JwtSecurityTokenExtension
+﻿namespace Basic.JwtSecurityTokenExtension
 {
     public class JwtOption
     {
