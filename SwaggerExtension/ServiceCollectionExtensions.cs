@@ -24,6 +24,8 @@ namespace Basic.SwaggerExtension
                 //添加公共Authorize
                 option.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
                 {
+                    //把token放在头部
+                    In = ParameterLocation.Header,
                     Description =
                         "JWT Authorization header using the Bearer scheme. Example: \"Authorization: Bearer {token}\"",
                     Name = "Authorization"
@@ -35,6 +37,8 @@ namespace Basic.SwaggerExtension
                     {
                         new OpenApiSecurityScheme
                         {
+                            //把token放在头部
+                            In = ParameterLocation.Header,
                             Reference = new OpenApiReference()
                             {
                                 Id = "Bearer",
