@@ -18,5 +18,12 @@ namespace Basic.JwtSecurityTokenExtension.Infrastructure
         /// <param name="claimsContent"></param>
         /// <returns></returns>
         Task<TokenWithRefreshTokenOut> CreateTokenWithRefresh(Dictionary<string, string> claimsContent = null);
+
+        /// <summary>
+        /// 刷新token
+        /// </summary>
+        /// <param name="refreshToken"></param>
+        /// <returns></returns>
+        TokenWithRefreshTokenOut RefreshToken(string refreshToken);
     }
 }

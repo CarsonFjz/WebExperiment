@@ -45,7 +45,7 @@ namespace WebTest
 
             services.AddExtensionAuthorization(Configuration);
 
-            services.AddJwtTokenExtension(x=>x.IssuerSigningKey = "Carson1234567890123123");
+            services.AddJwtTokenExtension(Configuration);
             //services.AddSingleton<IUserPermissionStore, UserPermissionStore>();
 
             services.AddSqlSugarUseMysql();
@@ -94,6 +94,8 @@ namespace WebTest
         {
             app.UseRouting();
 
+            //启动授权认证
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

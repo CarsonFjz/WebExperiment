@@ -51,7 +51,7 @@ namespace WebTest.Controllers
         /// <returns></returns>
         [HttpGet(nameof(Token))]
         [AllowAnonymous]
-        public async Task<TokenOut> Token(string role, string permission)
+        public async Task<TokenWithRefreshTokenOut> Token(string role, string permission)
         {
             var dic = new Dictionary<string, string>
             {
@@ -59,7 +59,19 @@ namespace WebTest.Controllers
                 {"per", permission}//权限
             };
 
-            return await _tokenHelper.CreateToken(dic);
+            return await _tokenHelper.CreateTokenWithRefresh(dic);
+        }
+
+        /// <summary>
+        /// 刷新token
+        /// </summary>
+        /// <param name="refreshToken"></param>
+        /// <returns></returns>
+        [HttpGet(nameof(RefreshToken))]
+        [AllowAnonymous]
+        public TokenWithRefreshTokenOut RefreshToken(string refreshToken)
+        {
+            return _tokenHelper.RefreshToken(refreshToken);
         }
 
         //[HttpGet(nameof(RefreshToken))]

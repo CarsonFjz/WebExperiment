@@ -11,7 +11,7 @@ namespace Basic.JwtSecurityTokenExtension.Implementation
 {
     public class JwtSecurityToken : JwtSecurityTokenHandler, IJwtSecurityToken
     {
-        protected readonly JwtOption _jwtOption;
+        private readonly JwtOption _jwtOption;
         private readonly IRefreshTokenStore _refreshTokenStore;
         private readonly DateTime _currentTime = DateTime.Now;
         
