@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using Microsoft.AspNetCore.Mvc.ApiExplorer;
+﻿using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
-using Swashbuckle.AspNetCore.Swagger;
 using Swashbuckle.AspNetCore.SwaggerGen;
+using System;
+using System.Collections.Generic;
+using System.IO;
 
 namespace Basic.SwaggerExtension
 {
@@ -13,22 +12,50 @@ namespace Basic.SwaggerExtension
     {
         public static IServiceCollection AddCustomSwagger(this IServiceCollection services, OpenApiInfo swaggerDoc)
         {
-            services.AddSwaggerGen((Action<SwaggerGenOptions>) (c =>
+            services.AddSwaggerGen((Action<SwaggerGenOptions>) (option =>
             {
-                c.SwaggerDoc(SwaggerParam.Name, swaggerDoc);
+                option.SwaggerDoc(SwaggerParam.Name, swaggerDoc);
 
-                c.DocInclusionPredicate((Func<string, ApiDescription, bool>) ((docName, description) => true));
+                option.DocInclusionPredicate((Func<string, ApiDescription, bool>) ((docName, description) => true));
 
-                c.DocumentFilter<LowerCaseDocumentFilter>();
+                option.DocumentFilter<LowerCaseDocumentFilter>();
 
+                #region 给接口加入Authorize
+                //添加公共Authorize
+                option.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
+                {
+                    Description =
+                        "JWT Authorization header using the Bearer scheme. Example: \"Authorization: Bearer {token}\"",
+                    Name = "Authorization"
+                });
+
+                //每个接口添加锁
+                option.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
+                    {
+                        new OpenApiSecurityScheme
+                        {
+                            Reference = new OpenApiReference()
+                            {
+                                Id = "Bearer",
+                                Type = ReferenceType.SecurityScheme
+                            }
+                        },
+                        Array.Empty<string>()
+                    }
+                });
+                #endregion
+
+                #region 读取根目录下的xml注释赋值到接口注释
                 var filePaths = new List<string>();
 
                 filePaths = ServiceCollectionExtensions.GetAllFileByPath(AppContext.BaseDirectory, "*.xml", filePaths);
 
                 foreach (var filePath in filePaths)
                 {
-                    c.IncludeXmlComments(filePath, false);
-                }
+                    option.IncludeXmlComments(filePath, false);
+                } 
+                #endregion
             }));
 
             return services;

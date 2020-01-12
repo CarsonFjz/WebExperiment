@@ -76,7 +76,7 @@ namespace WebTest
                 //异常处理
                 opt.Filters.Add(typeof(UserFriendlyExceptionFilterAttribute));
 
-            }).AddNewtonsoftJson();
+            });
 
             services.AddBasicSwagger(new OpenApiInfo()
             {
@@ -90,18 +90,18 @@ namespace WebTest
         /// 管道
         /// </summary>
         /// <param name="app"></param>
-        /// <param name="env"></param>
         public void Configure(IApplicationBuilder app)
         {
-            
-
             app.UseRouting();
+
+            app.UseAuthorization();
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
             });
 
-            app.UseAuthentication();
+            
         }
     }
 }
