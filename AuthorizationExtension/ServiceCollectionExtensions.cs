@@ -1,12 +1,12 @@
 ﻿using Basic.AuthorizationExtension.PermissionAuthorization;
 using Basic.AuthorizationExtension.RoleAuthorization;
 using Basic.AuthorizationExtension.UserPermissionAuthorization;
+using Basic.Core.ConfigurationExtension;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Text;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace Basic.AuthorizationExtension
 {
@@ -14,10 +14,9 @@ namespace Basic.AuthorizationExtension
     {
         public static IServiceCollection AddExtensionAuthorization(this IServiceCollection services, IConfiguration configuration)
         {
-            var issuer = configuration.GetSection("AuthenticationOption:Issuer").Value;
-            var audience = configuration.GetSection("AuthenticationOption:Audience").Value;
-            var issuerSigningKey = configuration.GetSection("AuthenticationOption:IssuerSigningKey").Value;
-            var authenticateScheme = configuration.GetSection("AuthenticationOption:AuthenticateScheme").Value;
+            var issuer = MicAppConfiguration.GetConfigurationValue("AuthenticationOption:Issuer");
+            var audience = MicAppConfiguration.GetConfigurationValue("AuthenticationOption:Audience");
+            var issuerSigningKey = MicAppConfiguration.GetConfigurationValue("AuthenticationOption:IssuerSigningKey");
 
             AuthenticationOption config = new AuthenticationOption
             {

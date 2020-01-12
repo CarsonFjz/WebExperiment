@@ -1,4 +1,5 @@
 ﻿using Basic.Core;
+using Basic.Core.ConfigurationExtension;
 using Basic.JwtSecurityTokenExtension.Implementation;
 using Basic.JwtSecurityTokenExtension.Infrastructure;
 using Microsoft.Extensions.Configuration;
@@ -12,11 +13,11 @@ namespace Basic.JwtSecurityTokenExtension
     {
         public static IServiceCollection AddJwtTokenExtension(this IServiceCollection services, IConfiguration configuration)
         {
-            var issuer = configuration.GetSection("JwtOption:Issuer").Value;
-            var audience = configuration.GetSection("JwtOption:Audience").Value;
-            var issuerSigningKey = configuration.GetSection("JwtOption:IssuerSigningKey").Value;
-            var accessTokenExpiresMinutes = configuration.GetSection("JwtOption:AccessTokenExpiresMinutes").Value;
-            var refreshTokenExpiresMinutes = configuration.GetSection("JwtOption:RefreshTokenExpiresMinutes").Value;
+            var issuer = MicAppConfiguration.GetConfigurationValue("JwtOption:Issuer");
+            var audience = MicAppConfiguration.GetConfigurationValue("JwtOption:Audience");
+            var issuerSigningKey = MicAppConfiguration.GetConfigurationValue("JwtOption:IssuerSigningKey");
+            var accessTokenExpiresMinutes = MicAppConfiguration.GetConfigurationValue("JwtOption:AccessTokenExpiresMinutes");
+            var refreshTokenExpiresMinutes = MicAppConfiguration.GetConfigurationValue("JwtOption:RefreshTokenExpiresMinutes");
 
             JwtOption config = new JwtOption
             {

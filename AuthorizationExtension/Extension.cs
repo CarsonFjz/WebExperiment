@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Routing;
 using System;
 using System.Security.Claims;
+using Basic.Core;
 
 namespace Basic.AuthorizationExtension
 {
