@@ -43,15 +43,21 @@ namespace WebTest
             //可以传递多个参数，以指定拦截不同的异常类型
             services.AddCustomExceptionHandler(typeof(UserFriendlyExceptionHandler));
 
-            services.AddExtensionAuthorization(Configuration);
-
-            services.AddJwtTokenExtension(Configuration);
+            //配置验证
+            services.AddJwtAuthorizationExtension();
+            //替换获取用户权限信息实现
             //services.AddSingleton<IUserPermissionStore, UserPermissionStore>();
 
+            //配置jwt
+            services.AddJwtTokenExtension(Configuration);
+
+            //配置SqlSugar
             services.AddSqlSugarUseMysql();
 
+            //配置Cap
             services.AddCap(x =>
             {
+                //使用SqlSugar配置
                 x.UseSqlSugar();
                 x.UseRabbitMQ(opt =>
                 {
@@ -73,7 +79,7 @@ namespace WebTest
                 opt.Filters.Add(typeof(MvcModelCheckResultFilter), 1);
                 //返回统一格式参数
                 opt.Filters.Add(typeof(MvcApiResultFilter), 2);
-                //异常处理
+                //业务友好提示处理，抛出200
                 opt.Filters.Add(typeof(UserFriendlyExceptionFilterAttribute));
 
             });

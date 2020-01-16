@@ -30,3 +30,6 @@
 /AuthorizationExtension/bin/Debug/netcoreapp3.1
 /AuthorizationExtension/obj
 /JwtSecurityTokenExtension/bin/Debug
+/HttpClient/bin/Debug/netstandard2.0
+/HttpClient/obj/Debug/netstandard2.0
+/HttpClient/obj

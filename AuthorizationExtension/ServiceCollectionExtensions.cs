@@ -12,7 +12,7 @@ namespace Basic.AuthorizationExtension
 {
     public static class ServiceCollectionExtensions
     {
-        public static IServiceCollection AddExtensionAuthorization(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection AddJwtAuthorizationExtension(this IServiceCollection services)
         {
             var issuer = MicAppConfiguration.GetConfigurationValue("AuthenticationOption:Issuer");
             var audience = MicAppConfiguration.GetConfigurationValue("AuthenticationOption:Audience");
@@ -25,14 +25,14 @@ namespace Basic.AuthorizationExtension
                 IssuerSigningKey = issuerSigningKey
             };
 
-            return services.AddExtensionAuthorization(x =>
+            return services.AddJwtAuthorizationExtension(x =>
             {
                 x.Issuer = config.Issuer;
                 x.Audience = config.Audience;
                 x.IssuerSigningKey = config.IssuerSigningKey;
             });
         }
-        public static IServiceCollection AddExtensionAuthorization(this IServiceCollection services, Action<AuthenticationOption> configure)
+        public static IServiceCollection AddJwtAuthorizationExtension(this IServiceCollection services, Action<AuthenticationOption> configure)
         {
             AuthenticationOption config = new AuthenticationOption();
 
