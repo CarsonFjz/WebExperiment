@@ -2,7 +2,6 @@
 using Basic.AuthorizationExtension.RoleAuthorization;
 using Basic.AuthorizationExtension.UserPermissionAuthorization;
 using Basic.Core.ConfigurationExtension;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using System;

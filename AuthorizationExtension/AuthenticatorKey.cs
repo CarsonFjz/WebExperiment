@@ -1,4 +1,4 @@
-﻿namespace Basic.Core
+﻿namespace Basic.AuthorizationExtension
 {
     public class AuthenticatorKey
     {

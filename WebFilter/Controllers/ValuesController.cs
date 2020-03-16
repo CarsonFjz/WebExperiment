@@ -1,16 +1,20 @@
-﻿using Basic.CapWithSugarExtension;
+﻿using AutoMapper;
+using Basic.AuthorizationExtension.RoleAuthorization;
+using Basic.CapWithSugarExtension;
 using Basic.Core.ResultModel;
+using Basic.JwtSecurityTokenExtension;
+using Basic.JwtSecurityTokenExtension.Infrastructure;
 using Basic.SugarExtension;
 using DotNetCore.CAP;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SqlSugar;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Basic.JwtSecurityTokenExtension;
-using Basic.JwtSecurityTokenExtension.Infrastructure;
+using WebTest.Domain;
+using WebTest.Infrastructure.Requests;
 using WebTest.Model;
-using Basic.AuthorizationExtension.RoleAuthorization;
 
 namespace WebTest.Controllers
 {
@@ -30,18 +34,22 @@ namespace WebTest.Controllers
 
         private readonly IJwtSecurityToken _tokenHelper;
 
+        private readonly IMapper _mapper;
+
         /// <summary>
         /// ctor
         /// </summary>
         /// <param name="sugarClient"></param>
         /// <param name="tokenHelper"></param>
         /// <param name="tranPublisher"></param>
-        public ValuesController(SqlSugarClient sugarClient, IJwtSecurityToken tokenHelper, ICapPublisher tranPublisher)
+        public ValuesController(SqlSugarClient sugarClient, IJwtSecurityToken tokenHelper, ICapPublisher tranPublisher, IMapper mapper)
         {
             _sugarClient = sugarClient;
             _tranPublisher = tranPublisher;
             _tokenHelper = tokenHelper;
+            _mapper = mapper;
         }
+
 
         /// <summary>
         /// 获取token
@@ -147,9 +155,10 @@ namespace WebTest.Controllers
         /// Content
         /// </summary>
         [HttpPost("Content")]
-        public ContentResult Content()
+        public ContentResult Content(PersonRequest request)
         {
-            return Content("111");
+            var result = _mapper.Map<Person>(request);
+            return new ContentResult();
         }
     }
 }

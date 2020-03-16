@@ -16,8 +16,7 @@ namespace Basic.SwaggerExtension
 
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/"+ SwaggerParam.Name + "/swagger.json", SwaggerParam.Name);
-                c.RoutePrefix = string.Empty;
+                c.SwaggerEndpoint($"/swagger/{SwaggerParam.Version}/swagger.json", SwaggerParam.Title);
             });
 
             return app;

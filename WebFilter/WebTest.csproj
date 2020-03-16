@@ -22,11 +22,13 @@
     <ProjectReference Include="..\MvcExtension\Basic.MvcExtension.csproj" />
     <ProjectReference Include="..\SugarExtension\Basic.SugarExtension.csproj" />
     <ProjectReference Include="..\SwaggerExtension\Basic.SwaggerExtension.csproj" />
+    <ProjectReference Include="..\WebTest.Domain\WebTest.Domain.csproj" />
+    <ProjectReference Include="..\WebTest.Infrastructure\WebTest.Infrastructure.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <None Update="WebTest.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
 

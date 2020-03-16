@@ -14,7 +14,7 @@ namespace Basic.SwaggerExtension
         {
             services.AddSwaggerGen((Action<SwaggerGenOptions>) (option =>
             {
-                option.SwaggerDoc(SwaggerParam.Name, swaggerDoc);
+                option.SwaggerDoc(SwaggerParam.Version, swaggerDoc);
 
                 option.DocInclusionPredicate((Func<string, ApiDescription, bool>) ((docName, description) => true));
 

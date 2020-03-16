@@ -24,7 +24,7 @@ namespace Basic.SwaggerExtension
             }
 
             swaggerDoc = info;
-            SwaggerParam.Name = swaggerDoc.Version;
+            SwaggerParam.Version = swaggerDoc.Version;
             SwaggerParam.Title = swaggerDoc.Title;
             services.AddCustomSwagger(swaggerDoc);
             services.AddTransient<IStartupFilter, SwaggerStartupFilter>();

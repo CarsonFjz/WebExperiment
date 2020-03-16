@@ -33,3 +33,9 @@
 /HttpClient/bin/Debug/netstandard2.0
 /HttpClient/obj/Debug/netstandard2.0
 /HttpClient/obj
+/WebTest.Application/bin/Debug/netstandard2.0
+/WebTest.Application/obj
+/WebTest.Domain/bin/Debug/netstandard2.0
+/WebTest.Domain/obj
+/WebTest.Infrastructure/bin/Debug/netstandard2.0
+/WebTest.Infrastructure/obj

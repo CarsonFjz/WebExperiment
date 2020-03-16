@@ -1,5 +1,4 @@
-﻿using Basic.AuthorizationExtension;
-using Basic.CapWithSugarExtension;
+﻿using Basic.CapWithSugarExtension;
 using Basic.CustomExceptionHandler;
 using Basic.JwtSecurityTokenExtension;
 using Basic.MvcExtension.Filters;
@@ -10,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 using WebTest.Exceptions.ExceptionHandler;
+using WebTest.Infrastructure;
 
 namespace WebTest
 {
@@ -38,13 +38,14 @@ namespace WebTest
         /// <param name="services"></param>
         public void ConfigureServices(IServiceCollection services)
         {
+            
             //处理错误要放到最前面，拦截所有的错误，mvc有自己的拦截机制，如果使用mvc拦截此中间件会无效
             //这里一般会用来拦截非MVC的其他中间件的错误，把控到返回前端的数据
             //可以传递多个参数，以指定拦截不同的异常类型
             services.AddCustomExceptionHandler(typeof(UserFriendlyExceptionHandler));
 
             //配置验证
-            services.AddJwtAuthorizationExtension();
+            //services.AddJwtAuthorizationExtension();
             //替换获取用户权限信息实现
             //services.AddSingleton<IUserPermissionStore, UserPermissionStore>();
 
@@ -90,6 +91,8 @@ namespace WebTest
                 Description = "WebFilter",
                 Version = "v1.0.0"
             });
+
+            services.AddApplication<InfrastructureModule>();
         }
 
         /// <summary>
@@ -100,7 +103,7 @@ namespace WebTest
         {
             app.UseRouting();
 
-            //启动授权认证
+            ////启动授权认证
             app.UseAuthentication();
             app.UseAuthorization();
 
@@ -108,8 +111,6 @@ namespace WebTest
             {
                 endpoints.MapControllers();
             });
-
-            
         }
     }
 }
